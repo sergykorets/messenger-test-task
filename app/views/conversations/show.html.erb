@@ -1,0 +1,53 @@
+<div class="spacer"></div>
+<%= link_to mailbox_inbox_path do %>
+  <i class="fa fa-chevron-left" aria-hidden="true"> Back</i>
+<% end %>
+<div class="spacer"></div>
+<div class="row">
+  <div class="col-md-10">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="media">
+          <div class="media-left">
+            <% if conversation.recipients.size > 2 %>
+              <a href="#">
+                <div class="round-image-50"><%= image_tag(conversation.originator.avatar.url(:thumb))%>
+                </div>
+              </a>
+            <% else %>  
+              <a href="#">
+                <div class="round-image-50"><%= image_tag(other_user_avatar(conversation).avatar.url(:thumb)) %></div>
+              </a>
+            <% end %>
+          </div>
+          <div class="media-body">
+            <%= link_to conversation_path(conversation) do %>
+              <h4 class="media-heading">
+                <%= other_user_names(conversation) %><br>
+              </h4>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-10">
+    <div class="panel panel-default">
+      <div class="panel-footer">
+        <!-- Reply Form -->
+        <%= form_for :message, url: reply_conversation_path(conversation) do |f| %>
+            <div class="form-group">
+              <%= f.text_area :body, placeholder: "Message", rows: 2, class: "form-control" %>
+            </div>
+            <%= f.submit "Send", class: 'btn btn-primary pull-left' %>
+        <% end %>
+        <div class="clearfix"></div>
+      </div>
+      <div class="panel-body">
+        <%= render partial: 'messages' %>
+      </div>
+    </div>
+  </div>
+</div>

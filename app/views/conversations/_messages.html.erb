@@ -1,0 +1,17 @@
+<% @receipts.each do |receipt| %>
+    <% message = receipt.message %>
+    <div class="media">
+      <div class="media-left">
+        <a href="#">
+          <div class="round-image-50"><%= image_tag(message.sender.avatar.url(:thumb)) %></div>
+        </a>
+      </div>
+      <div class="media-body">
+        <h4 class="media-heading">
+          <%= message.sender.name %> 
+          <small><%=  message.created_at.strftime("%A, %b %d, %Y at %I:%M%p") %></small>
+        </h4>
+        <%= message.body %>
+      </div>
+    </div>
+<% end %>
