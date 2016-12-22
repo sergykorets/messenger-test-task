@@ -28,8 +28,10 @@ class ConversationsController < ApplicationController
     redirect_to conversation_path(conversation)
   end
 
-  def remove
+  def destroy
     conversation.mark_as_deleted(current_user)
+    redirect_to conversations_path
+    #current_user.mailbox.conversations(conversation).destroy
   end
 
   # def trash

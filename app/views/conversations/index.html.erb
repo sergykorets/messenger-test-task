@@ -11,37 +11,48 @@
     <div class="panel panel-default">
       <div class="panel-body">
         <% @conversations.each do |c|%>
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <div class="media">
-                <div class="media-left">
-                  <% if c.recipients.size > 2 %>
-                    <a href="#">
-                      <div class="round-image-50"><%= image_tag(c.originator.avatar.url(:thumb))%>
-                      </div>
-                    </a>
-                  <% else %>  
-                    <a href="#">
-                      <div class="round-image-50"><%= image_tag(other_user_avatar(c).avatar.url(:thumb)) %></div>
-                    </a>
-                  <% end %>
-                </div>
-                <div class="media-body">
-                <%#= link_to "Delete", conversations_remove_path %>
+          <% if c.is_deleted?(current_user) %>
+            <% next %>
+          <% else %>
+
+            <div class="panel panel-default">
+            
+              <div class="panel-body">
+                <div class="media">
+
+                  <div class="media-left">
+                    <% if c.recipients.size > 2 %>
+                      <a href="#">
+                        <div class="round-image-50"><%= image_tag(c.originator.avatar.url(:thumb))%>
+                        </div>
+                      </a>
+                    <% else %>  
+                      <a href="#">
+                        <div class="round-image-50"><%= image_tag(other_user_avatar(c).avatar.url(:thumb)) %></div>
+                      </a>
+                    <% end %>
+                  </div>
+                  <div class="media-body">
                     <%= link_to conversation_path(c) do %>
                       <h4 class="media-heading">
                         <%= other_user_names(c) %><small> <%=  c.last_message.created_at.strftime("%A, %b %d, %Y at %I:%M%p")%></small><br><br>
                       </h4>
                       <%= image_tag(c.last_sender.avatar.url(:thumb), class: "round-image-30") %> <%= c.last_message.body %>
-                      <% unread = c.is_unread?(current_user) %>
+                      <% unread = c.is_unread?(current_user) %> 
                       <% if unread %>
                         <span class="label label-danger pull-right">Unread</span>
                       <% end %>
                     <% end %>
+                  </div>
+                  <div class="media-right">
+                    <%= link_to conversation_path(c), method: :delete, data: {:confirm => 'Are you sure?'} do %>
+                      <i class="fa fa-times" aria-hidden="true"></i>
+                    <% end %>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          <% end %>  
         <% end %>
       </div>
     </div>

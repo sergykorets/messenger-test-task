@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   get "application/refresh_nav" => "application#refresh_nav"
-  #get "conversations/remove" => "conversations#remove"
+  get "conversations/remove" => "conversations#remove"
   # mailbox folder routes
   #get "mailbox/inbox" => "mailbox#inbox", as: :mailbox_inbox
 
