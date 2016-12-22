@@ -3,7 +3,7 @@ class ConversationsController < ApplicationController
   #before_action :set_conversation, only: :remove
 
   def index
-    @conversations = current_user.mailbox.conversations.page(params[:page]).per(1)
+    @conversations = current_user.mailbox.conversations.page(params[:page]).per(10)
   end
 
   def new
