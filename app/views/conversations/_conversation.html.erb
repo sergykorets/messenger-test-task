@@ -14,6 +14,8 @@
         <% end %>
       </div>
       <div class="media-body">
+      
+        <%= link_to "Delete", conversations_remove_path %>  
         <%= link_to conversation_path(conversation) do %>
           <h4 class="media-heading">
             <%= other_user_names(conversation) %><small> <%=  conversation.last_message.created_at.strftime("%A, %b %d, %Y at %I:%M%p")%></small><br><br>

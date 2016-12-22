@@ -4,19 +4,15 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
-  
   get "application/refresh_nav" => "application#refresh_nav"
+  #get "conversations/remove" => "conversations#remove"
   # mailbox folder routes
-  get "mailbox/inbox" => "mailbox#inbox", as: :mailbox_inbox
-  #get "mailbox/sent" => "mailbox#sent", as: :mailbox_sent
-  #get "mailbox/trash" => "mailbox#trash", as: :mailbox_trash
+  #get "mailbox/inbox" => "mailbox#inbox", as: :mailbox_inbox
 
   # conversations
   resources :conversations do
     member do
       post :reply
-      #post :trash
-      #post :untrash
     end
   end
 

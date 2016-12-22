@@ -1,5 +1,10 @@
 class ConversationsController < ApplicationController
   before_action :authenticate_user!
+  #before_action :set_conversation, only: :remove
+
+  def index
+    @conversations = current_user.mailbox.conversations
+  end
 
   def new
   end
@@ -23,6 +28,10 @@ class ConversationsController < ApplicationController
     redirect_to conversation_path(conversation)
   end
 
+  def remove
+    conversation.mark_as_deleted(current_user)
+  end
+
   # def trash
   #   conversation.move_to_trash(current_user)
   #   redirect_to mailbox_inbox_path
@@ -34,6 +43,10 @@ class ConversationsController < ApplicationController
   # end
 
   private
+
+  def set_conversation
+    @conversation ||= mailbox.conversations.find(params[:id])
+  end
 
   def message_params
     params.require(:message).permit(:body, :subject)

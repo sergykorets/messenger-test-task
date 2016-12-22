@@ -16,13 +16,13 @@
             <li><%= link_to current_user.name, edit_user_registration_path %></li>
             <li class="round-image-50"><%= image_tag(current_user.avatar.url(:thumb)) %></li>
             <% if unread_messages_count != 0 %>
-              <li><%= link_to mailbox_inbox_path do  %>
+              <li><%= link_to conversations_path do  %>
                     <em class="fa fa-envelope fa-lg"></em>
                     <span class="label label-danger pull-right"><%= unread_messages_count %></span>
                   <% end %>
               </li>
             <% else %>
-              <li><%= link_to mailbox_inbox_path do  %>
+              <li><%= link_to conversations_path do  %>
                     <em class="fa fa-envelope fa-lg"></em>
                   <% end %>
               </li>
