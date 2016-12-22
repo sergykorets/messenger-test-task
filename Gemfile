@@ -30,6 +30,7 @@ gem 'paperclip'
 gem "rails_admin"
 gem 'rails_admin_rollincode', '~> 1.0'
 gem 'rails_12factor', group: :production
+gem 'kaminari'
 
 
 # Use ActiveModel has_secure_password

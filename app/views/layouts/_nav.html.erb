@@ -13,24 +13,24 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav pull-right">
         <% if user_signed_in? %>
-            <li><%= link_to current_user.name, edit_user_registration_path %></li>
-            <li class="round-image-50"><%= image_tag(current_user.avatar.url(:thumb)) %></li>
-            <% if unread_messages_count != 0 %>
-              <li><%= link_to conversations_path do  %>
-                    <em class="fa fa-envelope fa-lg"></em>
-                    <span class="label label-danger pull-right"><%= unread_messages_count %></span>
-                  <% end %>
-              </li>
-            <% else %>
-              <li><%= link_to conversations_path do  %>
-                    <em class="fa fa-envelope fa-lg"></em>
-                  <% end %>
-              </li>
-            <% end %>  
-            <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+          <li><%= link_to current_user.name, edit_user_registration_path %></li>
+          <li class="round-image-50"><%= image_tag(current_user.avatar.url(:thumb)) %></li>
+          <% if unread_messages_count != 0 %>
+            <li><%= link_to conversations_path do  %>
+                  <em class="fa fa-envelope fa-lg"></em>
+                  <span class="label label-danger pull-right"><%= unread_messages_count %></span>
+                <% end %>
+            </li>
+          <% else %>
+            <li><%= link_to conversations_path do  %>
+                  <em class="fa fa-envelope fa-lg"></em>
+                <% end %>
+            </li>
+          <% end %>  
+          <li><%= link_to "Logout", destroy_user_session_path, method: :delete, data: {:confirm => 'Are you sure?'} %></li>
         <% else %>                                                                                  
-            <li class="active"><%= link_to "Login", new_user_session_path %></li>
-            <li><%= link_to "Sign up", new_user_registration_path %></li>
+          <li class="active"><%= link_to "Login", new_user_session_path %></li>
+          <li><%= link_to "Sign up", new_user_registration_path %></li>
         <% end %>
       </ul>
     </div><!--/.nav-collapse -->

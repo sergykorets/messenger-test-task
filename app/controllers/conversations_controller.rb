@@ -3,7 +3,7 @@ class ConversationsController < ApplicationController
   #before_action :set_conversation, only: :remove
 
   def index
-    @conversations = current_user.mailbox.conversations
+    @conversations = current_user.mailbox.conversations.page(params[:page]).per(1)
   end
 
   def new
@@ -32,6 +32,10 @@ class ConversationsController < ApplicationController
     conversation.mark_as_deleted(current_user)
     redirect_to conversations_path
     #current_user.mailbox.conversations(conversation).destroy
+  end
+
+  def leave_conversation
+    @receipts.destroy_all
   end
 
   # def trash
